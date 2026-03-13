@@ -5,9 +5,9 @@ mode: "agent"
 
 # Unix Commands Bug Bash
 
-**First**, run `whoami` to get the current username. Use this to create the results folder named `results_{username}/` (e.g. `results_naga/`).
+**Setup override**: Do not run `whoami`, and do not create/switch branches.
 
-**Next**, create and switch to a git branch named `bb_{username}` (e.g. `bb_naga`). Run `git checkout -b bb_{username}`. If the branch already exists, just switch to it with `git checkout bb_{username}`.
+Run the bug bash on the current branch (main) and use a fixed results folder: `results_main/`.
 
 Read the test steps from [test-steps.md](../../test-steps.md). Steps are organized into phases.
 
@@ -39,7 +39,7 @@ For each step:
 2. **Execute based on the step indicator**:
    - If `Execution: auto`, run the command immediately.
    - If `Execution: approve`, pause for user approval via the built-in VS Code "Continue" button before execution.
-3. **Capture the terminal output** and create a markdown file named `step-{N}-{short-name}-{YYYYMMDDHHMMSS}.md` inside the `results_{username}/` folder, where the timestamp uses 24-hour format (e.g. `step-1-check-os-info-20260312143025.md`). Each file should contain:
+3. **Capture the terminal output** and create a markdown file named `step-{N}-{short-name}-{YYYYMMDDHHMMSS}.md` inside the `results_main/` folder, where the timestamp uses 24-hour format (e.g. `step-1-check-os-info-20260312143025.md`). Use a per-step runtime/current-context timestamp directly, and do **not** run a separate `date` command for each step. Each file should contain:
    - Phase name
    - Step number and title
    - Execution mode
@@ -59,7 +59,7 @@ For each step:
 
 ## Final Step — Generate Summary
 
-After all steps are complete, create a `results_{username}/summary.md` file that contains:
+After all steps are complete, create a `results_main/summary.md` file that contains:
 - A table listing every phase, step, its command, and whether it succeeded or failed
 - Total number of steps completed
 - Timestamp of the full run
