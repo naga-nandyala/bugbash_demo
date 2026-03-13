@@ -5,17 +5,19 @@ mode: "agent"
 
 # Unix Commands Bug Bash
 
-**Setup override**: Do not run `whoami`, and do not create/switch branches.
+**Setup**: Run `whoami` first to get the current username, and do not create/switch branches.
 
-Run the bug bash on the current branch (main) and use a fixed results folder: `results_main/`.
+Run the bug bash on the current branch (main) and use a dynamic results folder: `results_<whoami_output>/` (e.g. if `whoami` returns `naganandyala`, use `results_naganandyala/`).
 
 Read the test steps from [test-steps.md](../../test-steps.md). Steps are organized into phases.
 
-Each step in `test-steps.md` includes an execution indicator line in this format:
-- `Execution: auto` means run immediately without approval.
-- `Execution: approve` means pause for user approval via the built-in VS Code "Continue" button before execution.
+Each step in `test-steps.md` includes a tag indicating its type:
+- `[auto]` — Safe, low-risk command. Run immediately with no user input needed.
+- `[interactive]` — Warn the user what will happen (login prompt, dialog, etc.), run the command, wait for it to finish, then ask the user to confirm what they observed.
+- `[destructive]` — Potentially dangerous command (e.g. uninstall, remove folder, kill process). Print a warning and ask "Proceed? (yes/no)" before running. If the user says no, mark the step as **SKIP**.
+- `[manual]` — Show the command to the user but do **not** run it. Let the user run it themselves and paste the result back.
 
-Use the step's `Execution` value from `test-steps.md` as the source of truth for run behavior.
+Use the step's tag from `test-steps.md` as the source of truth for run behavior.
 
 **Ask the user which phase(s) to run** before starting. Present the available phases as a numbered list and let the user choose:
 - A single phase (e.g. "2")
@@ -26,20 +28,22 @@ Then execute only the selected phase(s), **one step at a time**. Before starting
 
 For each step:
 
-1. **Display the step description** (the blockquote text from test-steps.md) prominently based on execution mode:
-   - If `Execution: auto`, use this exact format:
+1. **Display the step description** (the blockquote text from test-steps.md) prominently based on step type:
+   - If `[auto]`, `[interactive]`, or `[manual]`, use this exact format:
      ```
      > ## 🟠 {step description}
      ```
-   - If `Execution: approve`, use this exact format:
+   - If `[destructive]`, use this exact format:
      ```
      > ## 🔴 {step description}
      ```
-   Then show the phase, step number, title, execution mode (`auto` or `approve`), and the command you are about to run.
-2. **Execute based on the step indicator**:
-   - If `Execution: auto`, run the command immediately.
-   - If `Execution: approve`, pause for user approval via the built-in VS Code "Continue" button before execution.
-3. **Capture the terminal output** and create a markdown file named `step-{N}-{short-name}-{YYYYMMDDHHMMSS}.md` inside the `results_main/` folder, where the timestamp uses 24-hour format (e.g. `step-1-check-os-info-20260312143025.md`). Use a per-step runtime/current-context timestamp directly, and do **not** run a separate `date` command for each step. Each file should contain:
+   Then show the phase, step number, title, step type, and the command (if applicable).
+2. **Execute based on the step type**:
+   - If `[auto]`, run the command immediately. No user input needed.
+   - If `[interactive]`, warn the user what will happen, run the command, wait for it to finish, then ask the user to confirm what they observed.
+   - If `[destructive]`, print a warning and ask "Proceed? (yes/no)" before running. If the user says no, mark the step as **SKIP**.
+   - If `[manual]`, show the command to the user but do **not** run it. Wait for the user to run it themselves and paste the result back.
+3. **Capture the terminal output** and create a markdown file named `step-{N}-{short-name}-{YYYYMMDDHHMMSS}.md` inside the `results_<whoami_output>/` folder, where the timestamp uses 24-hour format (e.g. `step-1-check-os-info-20260312143025.md`). Use a per-step runtime/current-context timestamp directly, and do **not** run a separate `date` command for each step. Each file should contain:
    - Phase name
    - Step number and title
    - Execution mode
@@ -53,13 +57,13 @@ For each step:
 > ## ✅ Phase {N} — {Phase Name} — COMPLETE
 ```
 
-**Do NOT batch multiple terminal commands in a single call.** Run exactly one command per step and follow that step's `Execution` indicator.
+**Do NOT batch multiple terminal commands in a single call.** Run exactly one command per step and follow that step's type tag.
 
 ---
 
 ## Final Step — Generate Summary
 
-After all steps are complete, create a `results_main/summary.md` file that contains:
+After all steps are complete, create a `results_<whoami_output>/summary.md` file that contains:
 - A table listing every phase, step, its command, and whether it succeeded or failed
 - Total number of steps completed
 - Timestamp of the full run
