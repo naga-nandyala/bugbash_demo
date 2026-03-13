@@ -11,6 +11,12 @@ mode: "agent"
 
 Read the test steps from [test-steps.md](../../test-steps.md). Steps are organized into phases.
 
+Each step in `test-steps.md` includes an execution indicator line in this format:
+- `Execution: auto` means run immediately without approval.
+- `Execution: approve` means pause for user approval via the built-in VS Code "Continue" button before execution.
+
+Use the step's `Execution` value from `test-steps.md` as the source of truth for run behavior.
+
 **Ask the user which phase(s) to run** before starting. Present the available phases as a numbered list and let the user choose:
 - A single phase (e.g. "2")
 - Multiple phases (e.g. "1, 3")
@@ -20,15 +26,23 @@ Then execute only the selected phase(s), **one step at a time**. Before starting
 
 For each step:
 
-1. **Display the step description** (the blockquote text from test-steps.md) prominently using this exact format:
-   ```
-   > ## 🔴 {step description}
-   ```
-   Then show the phase, step number, title, and the command you are about to run.
-2. **Immediately run the command** in the terminal. The user will approve via the built-in VS Code "Continue" button before it executes.
+1. **Display the step description** (the blockquote text from test-steps.md) prominently based on execution mode:
+   - If `Execution: auto`, use this exact format:
+     ```
+     > ## 🟠 {step description}
+     ```
+   - If `Execution: approve`, use this exact format:
+     ```
+     > ## 🔴 {step description}
+     ```
+   Then show the phase, step number, title, execution mode (`auto` or `approve`), and the command you are about to run.
+2. **Execute based on the step indicator**:
+   - If `Execution: auto`, run the command immediately.
+   - If `Execution: approve`, pause for user approval via the built-in VS Code "Continue" button before execution.
 3. **Capture the terminal output** and create a markdown file named `step-{N}-{short-name}-{YYYYMMDDHHMMSS}.md` inside the `results_{username}/` folder, where the timestamp uses 24-hour format (e.g. `step-1-check-os-info-20260312143025.md`). Each file should contain:
    - Phase name
    - Step number and title
+   - Execution mode
    - The exact command run
    - The full terminal output (in a code block)
    - A timestamp of when it was executed
@@ -39,7 +53,7 @@ For each step:
 > ## ✅ Phase {N} — {Phase Name} — COMPLETE
 ```
 
-**Do NOT batch multiple terminal commands in a single call.** Run exactly one command per step so the user gets an approval prompt for each one.
+**Do NOT batch multiple terminal commands in a single call.** Run exactly one command per step and follow that step's `Execution` indicator.
 
 ---
 
