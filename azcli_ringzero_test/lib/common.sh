@@ -21,7 +21,7 @@ setup_logging() {
     mkdir -p "${LOG_DIR}"
     LOG_FILE="${LOG_DIR}/${caller_script}_${timestamp}.log"
     # Tee stdout+stderr to log file, stripping ANSI codes for the file copy
-    exec > >(tee >(sed 's/\x1b\[[0-9;]*m//g' >> "${LOG_FILE}")) 2>&1
+    exec > >(tee >(sed $'s/\x1b\\[[0-9;]*m//g' >> "${LOG_FILE}")) 2>&1
 }
 
 # ──────────────────────────────────────────────
