@@ -34,7 +34,11 @@ bugbash_demo/
 ## Quick Start
 
 ### Unix Commands (Demo Simulation)
-Follow the steps in [bugbash_demo/phase1-steps.md](bugbash_demo/phase1-steps.md) and [bugbash_demo/phase2-steps.md](bugbash_demo/phase2-steps.md).
+Use the prompt file [.github/prompts/bugbash_demo.prompt.md](.github/prompts/bugbash_demo.prompt.md) in GitHub Copilot Chat. Copilot will read the phase files, execute each step for you based on its mode (`[auto]`, `[interactive]`, `[manual]`, `[destructive]`), capture outputs, and generate result logs — all guided through chat.
+
+Phase files:
+- [bugbash_demo/phase1-steps.md](bugbash_demo/phase1-steps.md) — System & Environment Basics
+- [bugbash_demo/phase2-steps.md](bugbash_demo/phase2-steps.md) — Process & Network Checks
 
 ### Azure Ring Zero
 ```bash
