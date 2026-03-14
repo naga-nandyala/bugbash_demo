@@ -7,7 +7,7 @@ mode: "agent"
 
 **Setup**: Run `whoami` first to get the current username, and do not create/switch branches.
 
-Run the bug bash on the current branch (main) and use a dynamic results folder: `results_<whoami_output>/` (e.g. if `whoami` returns `naganandyala`, use `results_naganandyala/`).
+Run the bug bash on the current branch (main) and use a dynamic results folder: `logs_bugbash_results_<whoami_output>/` (e.g. if `whoami` returns `naganandyala`, use `logs_bugbash_results_naganandyala/`).
 
 Read the test steps from [test-steps.md](../../test-steps.md). Steps are organized into phases.
 
@@ -43,7 +43,7 @@ For each step:
    - If `[interactive]`, warn the user what will happen, run the command, wait for it to finish, then ask the user to confirm what they observed.
    - If `[destructive]`, print a warning and ask "Proceed? (yes/no)" before running. If the user says no, mark the step as **SKIP**.
    - If `[manual]`, show the command to the user but do **not** run it. Wait for the user to run it themselves and paste the result back.
-3. **Capture the terminal output** and create a markdown file named `step-{N}-{short-name}-{YYYYMMDDHHMMSS}.md` inside the `results_<whoami_output>/` folder, where the timestamp uses 24-hour format (e.g. `step-1-check-os-info-20260312143025.md`). Use a per-step runtime/current-context timestamp directly, and do **not** run a separate `date` command for each step. Each file should contain:
+3. **Capture the terminal output** and create a markdown file named `step-{N}-{short-name}-{YYYYMMDDHHMMSS}.md` inside the `logs_bugbash_results_<whoami_output>/` folder, where the timestamp uses 24-hour format (e.g. `step-1-check-os-info-20260312143025.md`). Use a per-step runtime/current-context timestamp directly, and do **not** run a separate `date` command for each step. Each file should contain:
    - Phase name
    - Step number and title
    - Execution mode
@@ -63,7 +63,7 @@ For each step:
 
 ## Final Step — Generate Summary
 
-After all steps are complete, create a `results_<whoami_output>/summary.md` file that contains:
+After all steps are complete, create a `logs_bugbash_results_<whoami_output>/summary.md` file that contains:
 - A table listing every phase, step, its command, and whether it succeeded or failed
 - Total number of steps completed
 - Timestamp of the full run
