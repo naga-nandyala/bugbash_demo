@@ -8,7 +8,7 @@ Purpose:
 
 It is based on:
 - Prompt rules in [.github/prompts/bugbash_demo.prompt.md](.github/prompts/bugbash_demo.prompt.md)
-- Steps in [bugbash_demo/bugbash-demo-test-steps.md](bugbash_demo/bugbash-demo-test-steps.md)
+- Steps in [bugbash_demo/phase1-steps.md](bugbash_demo/phase1-steps.md) and [bugbash_demo/phase2-steps.md](bugbash_demo/phase2-steps.md)
 
 ## What A Real Run Looks Like
 
@@ -123,7 +123,7 @@ Each step file contains:
 
 ## Current 2-Phase Coverage
 
-The current [bugbash_demo/bugbash-demo-test-steps.md](bugbash_demo/bugbash-demo-test-steps.md) intentionally uses 2 phases, and both phases include all four step modes:
+The current phase files ([bugbash_demo/phase1-steps.md](bugbash_demo/phase1-steps.md) and [bugbash_demo/phase2-steps.md](bugbash_demo/phase2-steps.md)) intentionally cover 2 phases, and both include all four step modes:
 - `[auto]`
 - `[interactive]`
 - `[manual]`

@@ -9,15 +9,17 @@ mode: "agent"
 
 Run the bug bash on the current branch (main) and use a dynamic results folder: `logs_bugbash_results_<whoami_output>/` (e.g. if `whoami` returns `naganandyala`, use `logs_bugbash_results_naganandyala/`).
 
-Read the test steps from [bugbash-demo-test-steps.md](../../bugbash_demo/bugbash-demo-test-steps.md). Steps are organized into phases.
+Read the test steps from the phase files in `bugbash_demo/`:
+- [phase1-steps.md](../../bugbash_demo/phase1-steps.md) — Phase 1
+- [phase2-steps.md](../../bugbash_demo/phase2-steps.md) — Phase 2
 
-Each step in `bugbash-demo-test-steps.md` includes a tag indicating its type:
+Each step in the phase files includes a tag indicating its type:
 - `[auto]` — Safe, low-risk command. Run immediately with no user input needed.
 - `[interactive]` — Warn the user what will happen (login prompt, dialog, etc.), run the command, wait for it to finish, then ask the user to confirm what they observed.
 - `[destructive]` — Potentially dangerous command (e.g. uninstall, remove folder, kill process). Print a warning and ask "Proceed? (yes/no)" before running. If the user says no, mark the step as **SKIP**.
 - `[manual]` — Show the command to the user but do **not** run it. Let the user run it themselves and paste the result back.
 
-Use the step's tag from `bugbash-demo-test-steps.md` as the source of truth for run behavior.
+Use the step's tag from the phase files as the source of truth for run behavior.
 
 **Ask the user which phase(s) to run** before starting. Present the available phases as a numbered list and let the user choose:
 - A single phase (e.g. "2")
@@ -28,7 +30,7 @@ Then execute only the selected phase(s), **one step at a time**. Before starting
 
 For each step:
 
-1. **Display the step description** (the blockquote text from bugbash-demo-test-steps.md) prominently based on step type:
+1. **Display the step description** (the blockquote text from the phase file) prominently based on step type:
    - If `[auto]`, `[interactive]`, or `[manual]`, use this exact format:
      ```
      > ## 🟠 {step description}
