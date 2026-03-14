@@ -1,12 +1,14 @@
 # Bug Bash Demo
 
-A collection of exercises for bug bash participants to validate system fundamentals and Azure Ring Zero services.
+A collection of exercises that includes a Unix bug bash demo simulation and Azure Ring Zero service validation.
+
+The Unix flow in this repo is intentionally a practice run so participants can experience the bug bash style before the real Azure CLI bug bash (installation, uninstallation, login, and related scenarios).
 
 ## Exercises
 
 | Exercise | Description | Details |
 |----------|-------------|---------|
-| **Unix Commands** | 14 system validation steps covering OS info, files, processes, and networking | [test-steps.md](test-steps.md) |
+| **Unix Commands (Demo Simulation)** | 8 guided steps across 2 phases with all execution modes: auto, interactive, manual, destructive | [bugbash_demo/bugbash-demo-test-steps.md](bugbash_demo/bugbash-demo-test-steps.md) |
 | **Azure CLI — Ring Zero** | 8 Azure CLI scripts testing foundational Azure services (Entra ID, ARM, DNS, Networking, Storage, Compute, Key Vault, Monitor) | [README_AzCLI_RingZeroTest.md](README_AzCLI_RingZeroTest.md) |
 
 ## Structure
@@ -15,7 +17,8 @@ A collection of exercises for bug bash participants to validate system fundament
 bugbash_demo/
 ├── README.md                        # This file
 ├── README_AzCLI_RingZeroTest.md     # Azure Ring Zero test details
-├── test-steps.md                    # Unix command exercises
+├── bugbash_demo/
+│   └── bugbash-demo-test-steps.md   # Unix command demo exercises
 ├── azcli_ringzero_test/             # Azure CLI test scripts
 │   ├── main.sh                      # Orchestrator
 │   ├── 1_entra_id.sh … 8_monitor.sh # Individual service tests
@@ -31,8 +34,8 @@ bugbash_demo/
 
 ## Quick Start
 
-### Unix Commands
-Follow the steps in [test-steps.md](test-steps.md).
+### Unix Commands (Demo Simulation)
+Follow the steps in [bugbash_demo/bugbash-demo-test-steps.md](bugbash_demo/bugbash-demo-test-steps.md).
 
 ### Azure Ring Zero
 ```bash
