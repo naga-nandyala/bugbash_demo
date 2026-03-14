@@ -1,10 +1,8 @@
 # Bug Bash Demo Walkthrough
 
-This document shows how the Unix Commands bug bash will feel in a real run.
+This demo uses simple, harmless Unix commands to show exactly how the actual bug bash will look and feel — the step modes, the prompts, the output capture, and the phase flow.
 
-Purpose:
-- This is a demo simulation so users can understand the bug bash experience and step modes.
-- The real bug bash will focus on Azure CLI workflows such as installation, uninstallation, login, and related checks.
+No Azure resources or credentials are needed. The goal is to let participants experience the full bug bash workflow before running the real Azure CLI bug bash.
 
 It is based on:
 - Prompt rules in [.github/prompts/bugbash_demo.prompt.md](.github/prompts/bugbash_demo.prompt.md)

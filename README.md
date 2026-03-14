@@ -1,8 +1,6 @@
-# Bug Bash Demo
+# bugbash-azcli
 
-A collection of exercises that includes a Unix bug bash demo simulation and Azure Ring Zero service validation.
-
-The Unix flow in this repo is intentionally a practice run so participants can experience the bug bash style before the real Azure CLI bug bash (installation, uninstallation, login, and related scenarios).
+This repo contains the bug bash for Azure CLI — along with a demo simulation that uses simple, harmless Unix commands to show participants how the actual bug bash will look and feel before they run the real thing.
 
 ## Exercises
 
