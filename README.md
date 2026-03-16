@@ -6,24 +6,30 @@ This repo contains the bug bash for Azure CLI — along with a demo simulation t
 
 | Exercise | Description | Details |
 |----------|-------------|---------|
-| **Unix Commands (Demo Simulation)** | 8 guided steps across 2 phases with all execution modes: auto, interactive, manual, destructive | [bugbash_demo/](bugbash_demo/) |
-| **Azure CLI — Ring Zero** | 8 Azure CLI scripts testing foundational Azure services (Entra ID, ARM, DNS, Networking, Storage, Compute, Key Vault, Monitor) | [README_AzCLI_RingZeroTest.md](README_AzCLI_RingZeroTest.md) |
+| **Unix Commands (Demo Simulation)** | 8 guided steps across 2 phases with all execution modes: auto, interactive, manual, destructive | [README_BugBash_Demo.md](README_BugBash_Demo.md) |
+| **Azure CLI — Ring Zero (Individual)** | 8 Azure CLI scripts testing foundational Azure services individually (Create → Verify → Delete per service) | [README_AzCLI_RingZeroTest.md](README_AzCLI_RingZeroTest.md) |
+| **Azure CLI — Ring Zero (Integrated)** | All 8 services deployed together as an interconnected architecture in a single RG, with user-confirmed cleanup | [README_AzCLI_RingZeroIntegrated.md](README_AzCLI_RingZeroIntegrated.md) |
+| **Azure CLI — Install & Broker Test** _(Bug Bash)_ | The actual bug bash exercise — details TBD | [azcli_install_and_broker_test/](azcli_install_and_broker_test/) |
 
 ## Structure
 
 ```
-bugbash_demo/
-├── README.md                        # This file
-├── README_AzCLI_RingZeroTest.md     # Azure Ring Zero test details
+├── README.md                            # This file
+├── README_BugBash_Demo.md               # Unix demo simulation details
+├── README_AzCLI_RingZeroTest.md         # Ring Zero individual test details
+├── README_AzCLI_RingZeroIntegrated.md   # Ring Zero integrated architecture details
 ├── bugbash_demo/
-│   ├── phase1-steps.md               # Phase 1 — System & Environment Basics
-│   └── phase2-steps.md               # Phase 2 — Process & Network Checks
-├── azcli_ringzero_test/             # Azure CLI test scripts
-│   ├── main.sh                      # Orchestrator
-│   ├── 1_entra_id.sh … 8_monitor.sh # Individual service tests
-│   └── lib/common.sh               # Shared helpers
-├── logs_ringzero_test_<whoami>/     # Auto-generated test logs
-└── _archive/                        # Archived prompts
+│   ├── phase1-steps.md                  # Phase 1 — System & Environment Basics
+│   └── phase2-steps.md                  # Phase 2 — Process & Network Checks
+├── azcli_ringzero_test/                 # Individual service test scripts
+│   ├── main.sh                          # Orchestrator
+│   ├── 1_entra_id.sh … 8_monitor.sh     # Individual service tests
+│   └── lib/common.sh                    # Shared helpers
+├── azcli_ringzero_integrated/           # Integrated architecture test
+│   └── integrated_test.sh               # All-in-one: deploy, verify, inspect, cleanup
+├── azcli_install_and_broker_test/       # Actual bug bash exercise (TBD)
+├── resources/images/                    # Screenshots and diagrams
+└── logs_ringzero_test_<whoami>/         # Auto-generated test logs
 ```
 
 ## Prerequisites
@@ -40,7 +46,7 @@ Phase files:
 - [bugbash_demo/phase1-steps.md](bugbash_demo/phase1-steps.md) — System & Environment Basics
 - [bugbash_demo/phase2-steps.md](bugbash_demo/phase2-steps.md) — Process & Network Checks
 
-### Azure Ring Zero
+### Azure Ring Zero — Individual Tests
 ```bash
 cd azcli_ringzero_test/
 ./main.sh          # Run all 8 tests
@@ -48,4 +54,15 @@ cd azcli_ringzero_test/
 ./3_dns.sh         # Run one test standalone
 ```
 
-Each Azure test follows the lifecycle: **Create → Verify → Show → Delete → Verify deletion** — no leftover resources.
+Each test follows the lifecycle: **Create → Verify → Show → Delete → Verify deletion** — no leftover resources.
+
+### Azure Ring Zero — Integrated Architecture
+```bash
+cd azcli_ringzero_integrated/
+./integrated_test.sh
+```
+
+Deploys all services into a single RG as an interconnected architecture. Pauses for portal inspection, then asks for **explicit confirmation** before cleanup.
+
+### Azure CLI — Install & Broker Test _(Bug Bash)_
+Details TBD — see [azcli_install_and_broker_test/](azcli_install_and_broker_test/).
