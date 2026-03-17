@@ -154,4 +154,6 @@ If we can't observe it, we can't improve it.
 Test these changes on your daily‑driver hardware.
 Push the edges. Break things. Tell us what works — and what doesn't.
 
+**[Get started here](azcli_install_and_broker_test/README.md)** — follow the setup guide and let Copilot walk you through all 6 phases.
+
 Your feedback will directly shape the **next chapter of Azure CLI on macOS**.
