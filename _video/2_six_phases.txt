@@ -1,0 +1,18 @@
+Testing isn’t just about finding faults—it’s about trust. Every tool and procedure must reflect reliability, guided by clarity and intentionality. 
+This is the premise behind our bug bash, guided and orchestrated through Github Copilot in six precise phases.
+
+Phase one: Existing State. Before changing anything, we document the machine’s status—Python runtimes, Azure CLI, and its extensions. We validate functionality, then perform a clean uninstall to ensure a blank slate.
+
+Phase two: Cask Install. We challenge the new Homebrew Cask installation from end to end—checking signatures, logins, extensions, upgrades, and ensuring a clean uninstall after reinstall.
+
+
+Phase three: Offline Install. For environments without Homebrew, we download the tarball, inspect security attributes, set up standalone Python, and run the CLI independently.
+
+Phase four: Ring Zero. Installations aren’t enough. We deploy eight core Azure services as an interconnected architecture, verify each, then clean up—testing real-world utility.
+
+Phase five: Broker Authentication. We test the new macOS login via MSAL and Company Portal—verifying broker login, browser fallback, and toggling the flow for validation.
+
+Phase six: Telemetry Verification. Observability ensures installation and authentication flows are fully captured, with each attribute reaching the backend for analysis.
+
+
+

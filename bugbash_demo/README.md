@@ -5,8 +5,8 @@ This demo uses simple, harmless Unix commands to show exactly how the actual bug
 No Azure resources or credentials are needed. The goal is to let participants experience the full bug bash workflow before running the real Azure CLI bug bash.
 
 It is based on:
-- Prompt rules in [.github/prompts/bugbash_demo.prompt.md](.github/prompts/bugbash_demo.prompt.md)
-- Steps in [bugbash_demo/phase1-steps.md](bugbash_demo/phase1-steps.md) and [bugbash_demo/phase2-steps.md](bugbash_demo/phase2-steps.md)
+- Prompt rules in [../.github/prompts/bugbash_demo.prompt.md](../.github/prompts/bugbash_demo.prompt.md)
+- Steps in [phase1-steps.md](phase1-steps.md) and [phase2-steps.md](phase2-steps.md)
 
 ## What A Real Run Looks Like
 
@@ -121,7 +121,7 @@ Each step file contains:
 
 ## Current 2-Phase Coverage
 
-The current phase files ([bugbash_demo/phase1-steps.md](bugbash_demo/phase1-steps.md) and [bugbash_demo/phase2-steps.md](bugbash_demo/phase2-steps.md)) intentionally cover 2 phases, and both include all four step modes:
+The current phase files ([phase1-steps.md](phase1-steps.md) and [phase2-steps.md](phase2-steps.md)) intentionally cover 2 phases, and both include all four step modes:
 - `[auto]`
 - `[interactive]`
 - `[manual]`

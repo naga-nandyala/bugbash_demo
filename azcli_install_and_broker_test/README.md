@@ -1,19 +1,10 @@
 # Azure CLI — Install & Broker Test (Bug Bash)
 
-End-to-end bug bash exercise for Azure CLI v2.84.0 macOS Homebrew Cask distribution. Tests the full lifecycle: existing state capture, cask install, offline tarball install, broker authentication, Ring Zero service deployment, and telemetry verification.
-
-## Test Metadata
-
-| | |
-|---|---|
-| **Version** | 2.84.0 |
-| **azclitools tenant** | `ed94de55-1f87-4278-9651-525e7ba467d6` |
-| **azclitools org** | `https://dev.azure.com/azclitools` |
-| **Architectures** | ARM64 (Apple Silicon) and Intel (x86_64) |
+End-to-end bug bash exercise for Azure CLI macOS Homebrew Cask distribution. Tests the full lifecycle: existing state capture, cask install, offline tarball install, broker authentication, Ring Zero service deployment, and telemetry verification.
 
 ## Why Two Custom Taps?
 
-The bug bash tests two separate releases of Azure CLI 2.84.0:
+The bug bash tests two separate releases of Azure CLI:
 
 1. **`Azure/homebrew-azure-cli`** — The initial release build **without** the broker change. Phases 1-4 use this tap to validate core install, cask lifecycle, offline tarball, and Ring Zero against the baseline release.
 2. **`naga-nandyala/homebrew-mycli-app`** — A second release build **with** the broker change (macOS SSO via Company Portal). Phases 5-6 switch to this tap to test broker authentication and verify broker-specific telemetry fields.
@@ -26,7 +17,7 @@ This dual-tap approach lets participants validate the full install lifecycle on 
 |-------|--------|----------|
 | 1 — Existing State | Existing homebrew-core install | (no tap needed) |
 | 2 — Cask Install | Azure/homebrew-azure-cli | `Azure/azure-cli` tap → `https://github.com/Azure/homebrew-azure-cli` |
-| 3 — Offline Install | Azure/homebrew-azure-cli releases | `https://github.com/Azure/homebrew-azure-cli/releases/download/azure-cli-2.84.0/` |
+| 3 — Offline Install | Azure/homebrew-azure-cli releases | `https://github.com/Azure/homebrew-azure-cli/releases/` |
 | 4 — Ring Zero | Ring Zero scripts | (uses az login from prior phase) |
 | 5 — Broker Auth | naga-nandyala/homebrew-mycli-app | `naga-nandyala/mycli-app` tap → `https://github.com/naga-nandyala/homebrew-mycli-app` |
 | 6 — Telemetry | naga-nandyala/homebrew-mycli-app | (same cask as Phase 5, already installed) |
@@ -56,16 +47,35 @@ This dual-tap approach lets participants validate the full install lifecycle on 
 
 - macOS (ARM64 or Intel)
 - Homebrew installed
+- VS Code with GitHub Copilot Chat extension
 - Azure CLI currently installed via homebrew-core (for Phase 1 baseline)
 - Active Azure subscription (VS Enterprise recommended for Ring Zero)
-- Company Portal (Microsoft Intune) installed (for Phase 4 broker tests)
+- Company Portal (Microsoft Intune) installed (for Phase 5 broker tests)
 - Non-Homebrew Python 3.13 (python.org or pyenv) for Phase 3 offline tests (optional — can be skipped)
 
 ## Quick Start
 
-Use the prompt file in GitHub Copilot Chat:
+**1. Clone and open the repo**
 
-**[.github/prompts/bugbash.prompt.md](.github/prompts/bugbash.prompt.md)**
+```bash
+git clone https://github.com/naga-nandyala/bugbash-azcli.git
+cd bugbash-azcli
+code .
+```
+
+**2. Set up your environment**
+
+```bash
+cp .env.template .env
+```
+
+Edit `.env` and fill in your `PERSONAL_VSE_SUBSCRIPTION` (Azure subscription ID for Ring Zero deployments). The tenant ID and org URL are pre-filled.
+
+**3. Launch the bug bash**
+
+Open GitHub Copilot Chat in VS Code and use the prompt file:
+
+**[../.github/prompts/bugbash.prompt.md](../.github/prompts/bugbash.prompt.md)**
 
 Copilot will:
 1. Ask which phase(s) to run
@@ -75,12 +85,12 @@ Copilot will:
 
 ## Phase Files
 
-- [phase1-steps.md](azcli_install_and_broker_test/phase1-steps.md) — Existing State (Homebrew-Core Baseline)
-- [phase2-steps.md](azcli_install_and_broker_test/phase2-steps.md) — New Install via Homebrew-Cask
-- [phase3-steps.md](azcli_install_and_broker_test/phase3-steps.md) — Offline Install (Tarball, Non-Homebrew Python)
-- [phase4-steps.md](azcli_install_and_broker_test/phase4-steps.md) — Ring Zero Test
-- [phase5-steps.md](azcli_install_and_broker_test/phase5-steps.md) — Broker Authentication
-- [phase6-steps.md](azcli_install_and_broker_test/phase6-steps.md) — Telemetry Verification
+- [phase1-steps.md](phase1-steps.md) — Existing State (Homebrew-Core Baseline)
+- [phase2-steps.md](phase2-steps.md) — New Install via Homebrew-Cask
+- [phase3-steps.md](phase3-steps.md) — Offline Install (Tarball, Non-Homebrew Python)
+- [phase4-steps.md](phase4-steps.md) — Ring Zero Test
+- [phase5-steps.md](phase5-steps.md) — Broker Authentication
+- [phase6-steps.md](phase6-steps.md) — Telemetry Verification
 
 ## Phase Details
 
@@ -88,7 +98,7 @@ Copilot will:
 Captures the current homebrew-core install baseline: version, extensions, config. Logs in to azclitools, tests az upgrade and reinstall, then uninstalls the formula (preserving ~/.azure).
 
 ### Phase 2 — Cask Install
-Taps `Azure/azure-cli` (from `Azure/homebrew-azure-cli`), installs azure-cli 2.84.0, verifies code signing (Gatekeeper), tests basic functionality, extensions, az upgrade, reinstall/upgrade, and clean uninstall.
+Taps `Azure/azure-cli` (from `Azure/homebrew-azure-cli`), installs the azure-cli cask, verifies code signing (Gatekeeper), tests basic functionality, extensions, az upgrade, reinstall/upgrade, and clean uninstall.
 
 ### Phase 3 — Offline Install
 Downloads the release tarball from `Azure/homebrew-azure-cli` releases, verifies signatures, confirms az fails gracefully without AZ_PYTHON, then runs az with a non-Homebrew Python. Tests extension loading in offline mode.
@@ -110,3 +120,11 @@ Captures CorrelationIds from broker login, cancelled login, and non-broker login
 - Phase 4 requires an active az login session
 - Phase 6 telemetry verification via KQL should be done ~1 hour after the login events
 - Results are saved to `logs_bugbash_results_<whoami>/` with per-step markdown files and a final summary
+
+## Test Metadata
+
+| | |
+|---|---|
+| **azclitools tenant** | `ed94de55-1f87-4278-9651-525e7ba467d6` |
+| **azclitools org** | `https://dev.azure.com/azclitools` |
+| **Architectures** | ARM64 (Apple Silicon) and Intel (x86_64) |

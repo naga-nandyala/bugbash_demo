@@ -11,14 +11,14 @@ uname -a
 > Check total, used, and available RAM and swap space, then confirm the output looks correct.
 [interactive]
 ```
-free -h
+free -h 2>/dev/null || vm_stat
 ```
 
-### Step 3 — Home Directory Size
-> Open a terminal and run `du -sh ~` to check home directory usage. Paste the output here.
+### Step 3 — Home Directory Contents
+> List the top-level contents of your home directory with sizes.
 [manual]
 ```
-du -sh ~
+ls -lh ~
 ```
 
 ### Step 4 — Temp File Lifecycle

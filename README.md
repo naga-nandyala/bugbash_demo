@@ -6,32 +6,33 @@ This repo contains the bug bash for Azure CLI — along with a demo simulation t
 
 | Exercise | Description | Details |
 |----------|-------------|---------|
-| **Unix Commands (Demo Simulation)** | 8 guided steps across 2 phases with all execution modes: auto, interactive, manual, destructive | [README_BugBash_Demo.md](README_BugBash_Demo.md) |
-| **Azure CLI — Ring Zero (Individual)** | 8 Azure CLI scripts testing foundational Azure services individually (Create → Verify → Delete per service) | [README_AzCLI_RingZeroTest.md](README_AzCLI_RingZeroTest.md) |
-| **Azure CLI — Ring Zero (Integrated)** | All 8 services deployed together as an interconnected architecture in a single RG, with user-confirmed cleanup | [README_AzCLI_RingZeroIntegrated.md](README_AzCLI_RingZeroIntegrated.md) |
-| **Azure CLI — Install & Broker Test** _(Bug Bash)_ | 39 steps across 6 phases: existing state, cask install, offline tarball, broker auth, Ring Zero, telemetry | [README_AzCLI_InstallBrokerTest.md](README_AzCLI_InstallBrokerTest.md) |
+| **Unix Commands (Demo Simulation)** | 8 guided steps across 2 phases with all execution modes: auto, interactive, manual, destructive | [bugbash_demo/](bugbash_demo/) |
+| **Azure CLI — Ring Zero (Individual)** | 8 Azure CLI scripts testing foundational Azure services individually (Create → Verify → Delete per service) | [azcli_ringzero_test/](azcli_ringzero_test/) |
+| **Azure CLI — Ring Zero (Integrated)** | All 8 services deployed together as an interconnected architecture in a single RG, with user-confirmed cleanup | [azcli_ringzero_integrated/](azcli_ringzero_integrated/) |
+| **Azure CLI — Install & Broker Test** _(Bug Bash)_ | 39 steps across 6 phases: existing state, cask install, offline tarball, broker auth, Ring Zero, telemetry | [azcli_install_and_broker_test/](azcli_install_and_broker_test/) |
 
 ## Structure
 
 ```
 ├── README.md                            # This file
-├── README_BugBash_Demo.md               # Unix demo simulation details
-├── README_AzCLI_RingZeroTest.md         # Ring Zero individual test details
-├── README_AzCLI_RingZeroIntegrated.md   # Ring Zero integrated architecture details
-├── README_AzCLI_InstallBrokerTest.md    # Install & Broker Test details
+├── README_BugBash.md                    # Bug bash overview
 ├── .github/prompts/
 │   ├── bugbash_demo.prompt.md           # Copilot prompt — Unix demo
 │   └── bugbash.prompt.md                # Copilot prompt — Install & Broker
 ├── bugbash_demo/
+│   ├── README.md                      # Unix demo simulation details
 │   ├── phase1-steps.md                  # Phase 1 — System & Environment Basics
 │   └── phase2-steps.md                  # Phase 2 — Process & Network Checks
 ├── azcli_ringzero_test/                 # Individual service test scripts
+│   ├── README.md                        # Ring Zero individual test details
 │   ├── main.sh                          # Orchestrator
 │   ├── 1_entra_id.sh … 8_monitor.sh     # Individual service tests
 │   └── lib/common.sh                    # Shared helpers
 ├── azcli_ringzero_integrated/           # Integrated architecture test
+│   ├── README.md                        # Ring Zero integrated architecture details
 │   └── integrated_test.sh               # All-in-one: deploy, verify, inspect, cleanup
 ├── azcli_install_and_broker_test/       # Actual bug bash exercise
+│   ├── README.md                        # Install & Broker Test details
 │   ├── phase1-steps.md                  # Phase 1 — Existing State
 │   ├── phase2-steps.md                  # Phase 2 — Cask Install
 │   ├── phase3-steps.md                  # Phase 3 — Offline Install
@@ -98,7 +99,7 @@ cd azcli_ringzero_integrated/
 Deploys all services into a single RG as an interconnected architecture. Pauses for portal inspection, then asks for **explicit confirmation** before cleanup.
 
 ### Azure CLI — Install & Broker Test _(Bug Bash)_
-Use the prompt file [.github/prompts/bugbash.prompt.md](.github/prompts/bugbash.prompt.md) in GitHub Copilot Chat. 39 steps across 6 phases testing the full Azure CLI v2.84.0 macOS Homebrew Cask lifecycle.
+Use the prompt file [.github/prompts/bugbash.prompt.md](.github/prompts/bugbash.prompt.md) in GitHub Copilot Chat. 39 steps across 6 phases testing the full Azure CLI macOS Homebrew Cask lifecycle.
 
 Phase files:
 - [azcli_install_and_broker_test/phase1-steps.md](azcli_install_and_broker_test/phase1-steps.md) — Existing State
@@ -108,4 +109,4 @@ Phase files:
 - [azcli_install_and_broker_test/phase5-steps.md](azcli_install_and_broker_test/phase5-steps.md) — Broker Auth
 - [azcli_install_and_broker_test/phase6-steps.md](azcli_install_and_broker_test/phase6-steps.md) — Telemetry
 
-See [README_AzCLI_InstallBrokerTest.md](README_AzCLI_InstallBrokerTest.md) for full details.
+See [azcli_install_and_broker_test/](azcli_install_and_broker_test/) for full details.

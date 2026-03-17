@@ -26,7 +26,7 @@ Deploy **all Ring Zero services into a single resource group** as an interconnec
 
 Instead of testing each service in isolation (create → verify → delete), this script deploys all eight Ring Zero services **wired together** so you can see them as a cohesive architecture.
 
-![Integrated Architecture — Resource Group overview and Resource Visualizer](resources/images/ring_zero_integrated.png)
+![Integrated Architecture — Resource Group overview and Resource Visualizer](../resources/images/ring_zero_integrated.png)
 
 ### Service Interconnections
 
@@ -92,7 +92,7 @@ azcli_ringzero_integrated/
 └── integrated_test.sh   # All-in-one: deploy, verify, inspect, cleanup
 ```
 
-> **Note:** The script reuses `azcli_ringzero_test/lib/common.sh` for shared config, colors, logging, and lifecycle helpers.
+> **Note:** The script reuses `../azcli_ringzero_test/lib/common.sh` for shared config, colors, logging, and lifecycle helpers.
 
 ## Cost
 
