@@ -22,7 +22,7 @@ If `.env` does not exist, tell the user to copy `.env.template` to `.env` and fi
 | **Version** | 2.84.0 |
 | **azclitools tenant** | `$AZCLITOOLS_TENANT_ID` (from `.env`) |
 | **azclitools org** | `$AZCLITOOLS_ORG` (from `.env`) |
-| **VSE subscription** | `$PERSONAL_VSE_SUBSCRIPTION` (from `.env`, used in Phase 4 — Ring Zero) |
+| **VSE subscription** | `$PERSONAL_VSE_TENANT_ID` (from `.env`, used in Phase 4 — Ring Zero) |
 
 ## Phase Sources
 

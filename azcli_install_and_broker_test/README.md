@@ -69,7 +69,7 @@ code .
 cp .env.template .env
 ```
 
-Edit `.env` and fill in your `PERSONAL_VSE_SUBSCRIPTION` (Azure subscription ID for Ring Zero deployments). The tenant ID and org URL are pre-filled.
+Edit `.env` and fill in your `PERSONAL_VSE_TENANT_ID` (Azure subscription ID for Ring Zero deployments). The tenant ID and org URL are pre-filled.
 
 **3. Launch the bug bash**
 
