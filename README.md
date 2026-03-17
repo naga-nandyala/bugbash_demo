@@ -4,6 +4,8 @@ This repo contains Azure CLI macOS bug bash exercises, demos, and validation scr
 
 ## Azure CLI macOS Bug Bash
 
+<img src="resources/images/bugbash-banner.png" alt="Azure CLI on macOS Bug Bash" width="700">
+
 The primary focus of this repo is the **Azure CLI on macOS — Installation & Authentication Bug Bash**. It validates three major changes shipping together:
 
 1. **Homebrew Cask installation** — Azure CLI moves from the legacy formula to a self-contained, pre-built Cask bundle
