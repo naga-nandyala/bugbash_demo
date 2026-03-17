@@ -56,7 +56,24 @@ Use the step's tag from the phase files as the source of truth for run behavior.
 - Multiple phases (e.g. "1, 4")
 - "all" to run every phase
 
-Then execute only the selected phase(s), **one step at a time**. Before starting each phase, display the phase name and the steps it contains.
+Then execute only the selected phase(s), **one step at a time**. Before starting each phase, display the phase name and a **table** of all steps using this exact format:
+
+```
+## Phase {N} — {Phase Name}
+
+| # | Step | Type |
+|---|------|------|
+| 1 | {step title} | 🔵 `auto` |
+| 2 | {step title} | 🟠 `interactive` |
+| 3 | {step title} | 🔴 `destructive` |
+| 4 | {step title} | 🟡 `manual` |
+```
+
+Use the matching color indicator for each step type:
+- 🔵 `auto` — safe, runs automatically
+- 🟠 `interactive` — requires user interaction
+- 🔴 `destructive` — dangerous, requires confirmation
+- 🟡 `manual` — user runs it themselves
 
 **Phase-specific notes:**
 - **Phase 3 (Offline Install):** Step 6 downloads and installs python.org Python 3.13 (requires sudo). If Step 6 fails (download or install error), also skip Steps 7 and 8.
