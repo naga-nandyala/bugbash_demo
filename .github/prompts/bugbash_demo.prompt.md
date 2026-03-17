@@ -31,7 +31,11 @@ Then execute only the selected phase(s), **one step at a time**. Before starting
 For each step:
 
 1. **Display the step description** (the blockquote text from the phase file) prominently based on step type:
-   - If `[auto]`, `[interactive]`, or `[manual]`, use this exact format:
+   - If `[auto]`, use this exact format:
+     ```
+     > ## 🔵 {step description}
+     ```
+   - If `[interactive]` or `[manual]`, use this exact format:
      ```
      > ## 🟠 {step description}
      ```
@@ -63,9 +67,19 @@ For each step:
 
 ---
 
-## Final Step — Generate Summary
+## Phase Summary — After Each Phase
 
-After all steps are complete, create a `logs_bugbash_results_<whoami_output>/summary.md` file that contains:
-- A table listing every phase, step, its command, and whether it succeeded or failed
-- Total number of steps completed
+After the last step of each phase, create a `logs_bugbash_results_<whoami_output>/p{N}-summary.md` file (e.g. `p1-summary.md`) that contains:
+- Phase name and number
+- A table listing every step in that phase, its command, execution mode, and whether it passed, failed, or was skipped
+- Number of steps completed, passed, failed, and skipped for that phase
+- Timestamp of the phase run
+
+---
+
+## Final Step — Generate Overall Summary
+
+After all selected phases are complete, create a `logs_bugbash_results_<whoami_output>/summary.md` that consolidates **all `p{N}-summary.md` files found** in the results folder (not just the phases run in this session). This allows phases to be run across separate Copilot sessions and still produce a unified summary.
+- A table listing every phase, step, its command, execution mode, and whether it passed, failed, or was skipped (combine all `p{N}-summary.md` data)
+- Total number of steps completed, passed, failed, and skipped across all phases
 - Timestamp of the full run
