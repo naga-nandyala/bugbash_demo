@@ -7,7 +7,7 @@ mode: "agent"
 
 **Setup**: Run `whoami` first to get the current username, and do not create/switch branches.
 
-Run the bug bash on the current branch (main) and use a dynamic results folder: `logs_bugbash_results_<whoami_output>/` (e.g. if `whoami` returns `naganandyala`, use `logs_bugbash_results_naganandyala/`).
+Run the bug bash on the current branch (main) and use a dynamic results folder: `logs_bugbash_demo_results_<whoami_output>/` (e.g. if `whoami` returns `naganandyala`, use `logs_bugbash_demo_results_naganandyala/`).
 
 Read the test steps from the phase files in `bugbash_demo/`:
 - [phase1-steps.md](../../bugbash_demo/phase1-steps.md) — Phase 1
@@ -49,7 +49,7 @@ For each step:
    - If `[interactive]`, warn the user what will happen, run the command, wait for it to finish, then ask the user to confirm what they observed.
    - If `[destructive]`, print a warning and ask "Proceed? (yes/no)" before running. If the user says no, mark the step as **SKIP**.
    - If `[manual]`, show the command to the user but do **not** run it. Wait for the user to run it themselves and paste the result back.
-3. **Capture the terminal output** and create a markdown file named `step-{N}-{short-name}-{YYYYMMDDHHMMSS}.md` inside the `logs_bugbash_results_<whoami_output>/` folder, where the timestamp uses 24-hour format (e.g. `step-1-check-os-info-20260312143025.md`). Use a per-step runtime/current-context timestamp directly, and do **not** run a separate `date` command for each step. Each file should contain:
+3. **Capture the terminal output** and create a markdown file named `step-{N}-{short-name}-{YYYYMMDDHHMMSS}.md` inside the `logs_bugbash_demo_results_<whoami_output>/` folder, where the timestamp uses 24-hour format (e.g. `step-1-check-os-info-20260312143025.md`). Use a per-step runtime/current-context timestamp directly, and do **not** run a separate `date` command for each step. Each file should contain:
    - Phase name
    - Step number and title
    - Execution mode
@@ -69,7 +69,7 @@ For each step:
 
 ## Phase Summary — After Each Phase
 
-After the last step of each phase, create a `logs_bugbash_results_<whoami_output>/p{N}-summary.md` file (e.g. `p1-summary.md`) that contains:
+After the last step of each phase, create a `logs_bugbash_demo_results_<whoami_output>/p{N}-summary.md` file (e.g. `p1-summary.md`) that contains:
 - Phase name and number
 - A table listing every step in that phase, its command, execution mode, and whether it passed, failed, or was skipped
 - Number of steps completed, passed, failed, and skipped for that phase
@@ -79,7 +79,7 @@ After the last step of each phase, create a `logs_bugbash_results_<whoami_output
 
 ## Final Step — Generate Overall Summary
 
-After all selected phases are complete, create a `logs_bugbash_results_<whoami_output>/summary.md` that consolidates **all `p{N}-summary.md` files found** in the results folder (not just the phases run in this session). This allows phases to be run across separate Copilot sessions and still produce a unified summary.
+After all selected phases are complete, create a `logs_bugbash_demo_results_<whoami_output>/summary.md` that consolidates **all `p{N}-summary.md` files found** in the results folder (not just the phases run in this session). This allows phases to be run across separate Copilot sessions and still produce a unified summary.
 - A table listing every phase, step, its command, execution mode, and whether it passed, failed, or was skipped (combine all `p{N}-summary.md` data)
 - Total number of steps completed, passed, failed, and skipped across all phases
 - Timestamp of the full run
