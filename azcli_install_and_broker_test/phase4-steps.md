@@ -28,3 +28,12 @@ az account show --output table
 cd ../azcli_ringzero_integrated
 ./integrated_test.sh
 ```
+
+### Step 4 — Uninstall Azure CLI and untap
+> Clean up the Azure CLI cask and tap installed in Step 1, leaving a clean slate for Phase 5 (broker testing with a different tap).
+[destructive]
+```
+brew uninstall --cask azure-cli
+brew untap Azure/azure-cli 2>/dev/null || true
+which az 2>/dev/null && echo "WARN: az still found" || echo "PASS: az removed"
+```

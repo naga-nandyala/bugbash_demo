@@ -22,7 +22,7 @@ This repo contains several exercises. Each has its own folder with a README cove
 
 | Exercise | Description | Details |
 | ----------|-------------|---------|
-| **Azure CLI — Install & Broker Test** _(Bug Bash)_ | 39 steps across 6 phases: existing state, cask install, offline tarball, broker auth, Ring Zero, telemetry | [azcli_install_and_broker_test/](azcli_install_and_broker_test/) |
+| **Azure CLI — Install & Broker Test** _(Bug Bash)_ | 45 steps across 6 phases: existing state, cask install, offline tarball, broker auth, Ring Zero, telemetry | [azcli_install_and_broker_test/](azcli_install_and_broker_test/) |
 | **Unix Commands (Demo Simulation)** | 8 guided steps across 2 phases with all execution modes: auto, interactive, manual, destructive | [bugbash_demo/](bugbash_demo/) |
 | **Azure CLI — Ring Zero (Individual)** | 8 Azure CLI scripts testing foundational Azure services individually (Create → Verify → Delete per service) | [azcli_ringzero_test/](azcli_ringzero_test/) |
 | **Azure CLI — Ring Zero (Integrated)** | All 8 services deployed together as an interconnected architecture in a single RG, with user-confirmed cleanup | [azcli_ringzero_integrated/](azcli_ringzero_integrated/) |
@@ -55,7 +55,7 @@ This repo contains several exercises. Each has its own folder with a README cove
 ├── .github/prompts/
 │   ├── bugbash_demo.prompt.md           # Copilot prompt — Unix demo
 │   └── bugbash.prompt.md               # Copilot prompt — Install & Broker
-├── azcli_install_and_broker_test/       # Bug bash exercise (6 phases, 39 steps)
+├── azcli_install_and_broker_test/       # Bug bash exercise (6 phases, 45 steps)
 │   ├── README.md
 │   └── phase1-steps.md … phase6-steps.md
 ├── azcli_ringzero_test/                 # Individual Ring Zero service tests

@@ -74,3 +74,12 @@ az logout
 az login --tenant ed94de55-1f87-4278-9651-525e7ba467d6
 az devops project list --org https://dev.azure.com/azclitools --output table
 ```
+
+### Step 7 — Uninstall Azure CLI and untap
+> Clean up the Azure CLI cask and tap installed at the start of this phase, leaving a clean slate for Phase 6.
+[destructive]
+```
+brew uninstall --cask azure-cli
+brew untap naga-nandyala/mycli-app 2>/dev/null || true
+which az 2>/dev/null && echo "WARN: az still found" || echo "PASS: az removed"
+```

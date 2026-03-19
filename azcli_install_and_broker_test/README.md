@@ -29,10 +29,10 @@ This dual-tap approach lets participants validate the full install lifecycle on 
 | 1 | Existing State (Homebrew-Core Baseline) | 7 | auto, interactive, destructive |
 | 2 | New Install via Homebrew-Cask | 11 | auto, interactive, destructive |
 | 3 | Offline Install (Tarball, Non-Homebrew Python) | 9 | auto, interactive, destructive |
-| 4 | Ring Zero Test | 1 | interactive |
-| 5 | Broker Authentication | 6 | auto, interactive, destructive |
-| 6 | Telemetry Verification | 5 | interactive, auto, manual |
-| | **Total** | **39** | |
+| 4 | Ring Zero Test | 4 | auto, interactive, destructive |
+| 5 | Broker Authentication | 7 | auto, interactive, manual, destructive |
+| 6 | Telemetry Verification | 7 | auto, interactive, manual, destructive |
+| | **Total** | **45** | |
 
 ## Step Execution Modes
 
