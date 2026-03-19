@@ -1,11 +1,13 @@
 # Phase 5 — Broker Authentication
 
-Note: Untap any existing custom taps and re-install the cask before running broker tests:
+Note: Uninstall any existing azure-cli casks, untap conflicting taps, then re-install from the correct tap:
 ```
+brew uninstall --cask azure/azure-cli/azure-cli 2>/dev/null || true
+brew uninstall --cask naga-nandyala/mycli-app/azure-cli 2>/dev/null || true
 brew untap Azure/azure-cli 2>/dev/null || true
 brew untap naga-nandyala/mycli-app 2>/dev/null || true
 brew tap naga-nandyala/mycli-app
-brew install --cask azure-cli 2>/dev/null || true
+brew install --cask azure-cli
 ```
 
 ### Step 1 — Check Company Portal
@@ -79,7 +81,7 @@ az devops project list --org https://dev.azure.com/azclitools --output table
 > Clean up the Azure CLI cask and tap installed at the start of this phase, leaving a clean slate for Phase 6.
 [destructive]
 ```
-brew uninstall --cask azure-cli
+brew uninstall --cask naga-nandyala/mycli-app/azure-cli
 brew untap naga-nandyala/mycli-app 2>/dev/null || true
 which az 2>/dev/null && echo "WARN: az still found" || echo "PASS: az removed"
 ```
