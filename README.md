@@ -11,13 +11,17 @@ This repo contains Azure CLI macOS bug bash exercises, demos, and validation scr
 ### Demo
 
 <div align="center">
-  <video src="https://github.com/naga-nandyala/bugbash-azcli/releases/download/0.0.1/BugBash_Demo.mp4" controls width="700"></video>
+  <a href="https://github.com/naga-nandyala/bugbash-azcli/releases/download/0.0.1/BugBash_Demo.mp4">
+    <img src="https://img.shields.io/badge/▶_Watch_Demo-blue?style=for-the-badge&logo=github" alt="Watch Demo Video">
+  </a>
 </div>
 
 ### Full Bug Bash Walkthrough
 
 <div align="center">
-  <video src="https://github.com/naga-nandyala/bugbash-azcli/releases/download/0.0.1/BugBash.mp4" controls width="700"></video>
+  <a href="https://github.com/naga-nandyala/bugbash-azcli/releases/download/0.0.1/BugBash.mp4">
+    <img src="https://img.shields.io/badge/▶_Watch_Full_Walkthrough-green?style=for-the-badge&logo=github" alt="Watch Full Walkthrough Video">
+  </a>
 </div>
 
 The primary focus of this repo is the **Azure CLI on macOS — Installation & Authentication Bug Bash**. It validates three major changes shipping together:
