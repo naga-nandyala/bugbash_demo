@@ -1,11 +1,13 @@
 ---
-description: "Run a Unix commands bug bash — executes test steps one at a time, captures output to markdown files"
+description: "Run a cross-platform commands bug bash (bash/zsh/pwsh) — executes test steps one at a time, captures output to markdown files"
 mode: "agent"
 ---
 
 # Unix Commands Bug Bash
 
 **Setup**: Run `whoami` first to get the current username, and do not create/switch branches.
+
+**Shell detection**: Detect the user's shell environment before running any steps. Check the active terminal — if it is PowerShell (`pwsh`), use the `pwsh` code blocks from the phase files. If it is bash/zsh (Linux/macOS/WSL), use the `bash` code blocks. Each step in the phase files provides both a `bash` and a `pwsh` command variant. Always pick the one matching the detected shell. The `whoami` command works on all platforms.
 
 Run the bug bash on the current branch (main) and use a dynamic results folder: `logs_bugbash_demo_results_<whoami_output>/` (e.g. if `whoami` returns `naganandyala`, use `logs_bugbash_demo_results_naganandyala/`).
 
@@ -20,6 +22,8 @@ Each step in the phase files includes a tag indicating its type:
 - `[manual]` — Show the command to the user but do **not** run it. Let the user run it themselves and paste the result back.
 
 Use the step's tag from the phase files as the source of truth for run behavior.
+
+Each step provides two command variants in fenced code blocks labeled `bash` and `pwsh`. Always use the variant matching the detected shell environment.
 
 **Ask the user which phase(s) to run** before starting. Present the available phases as a numbered list and let the user choose:
 - A single phase (e.g. "2")

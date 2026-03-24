@@ -1,8 +1,10 @@
 # Bug Bash Demo Walkthrough
 
-This demo uses simple, harmless Unix commands to show exactly how the actual bug bash will look and feel — the step modes, the prompts, the output capture, and the phase flow.
+This demo uses simple, harmless commands to show exactly how the actual bug bash will look and feel — the step modes, the prompts, the output capture, and the phase flow.
 
 No Azure resources or credentials are needed. The goal is to let participants experience the full bug bash workflow before running the real Azure CLI bug bash.
+
+**Supported shells**: bash/zsh (Linux, macOS, WSL) and PowerShell (`pwsh` on Windows). Each step provides both a `bash` and a `pwsh` command variant — the prompt automatically detects the active shell and picks the right one.
 
 It is based on:
 - Prompt rules in [../.github/prompts/bugbash_demo.prompt.md](../.github/prompts/bugbash_demo.prompt.md)
@@ -56,14 +58,26 @@ At end of phase:
 
 ## Example Flow Snippets
 
-### Example `[auto]`
+### Example `[auto]` (bash)
 
 ```text
-> ## 🟠 Verify the operating system, kernel version, and architecture of the machine.
+> ## 🔵 Verify the operating system, kernel version, and architecture of the machine.
 Phase: 1 — System & Environment Basics
 Step: 1 — Check OS Info
 Type: [auto]
 Command: uname -a
+
+# command runs immediately
+```
+
+### Example `[auto]` (pwsh)
+
+```text
+> ## 🔵 Verify the operating system, kernel version, and architecture of the machine.
+Phase: 1 — System & Environment Basics
+Step: 1 — Check OS Info
+Type: [auto]
+Command: [System.Environment]::OSVersion; $PSVersionTable
 
 # command runs immediately
 ```
@@ -75,7 +89,8 @@ Command: uname -a
 Phase: 1 — System & Environment Basics
 Step: 2 — Memory Usage
 Type: [interactive]
-Command: free -h
+Command (bash): free -h
+Command (pwsh): Get-CimInstance Win32_OperatingSystem | Select-Object TotalVisibleMemorySize, FreePhysicalMemory, TotalVirtualMemorySize, FreeVirtualMemory
 
 Warning: this interactive step requires confirmation after execution.
 # command runs
@@ -91,7 +106,8 @@ Please confirm:
 Phase: 1 — System & Environment Basics
 Step: 3 — Home Directory Size
 Type: [manual]
-Command (do not auto-run): du -sh ~
+Command (do not auto-run, bash): du -sh ~
+Command (do not auto-run, pwsh): Get-ChildItem ~ | Format-Table Name, Length, LastWriteTime
 
 # user runs command and pastes output
 ```
@@ -118,6 +134,14 @@ Each step file contains:
 - Exact command run
 - Full terminal output in a code block
 - Execution timestamp
+
+## Cross-Platform Support
+
+Each step in the phase files provides two command variants in labeled fenced code blocks:
+- `` ```bash `` — for bash/zsh (Linux, macOS, WSL)
+- `` ```pwsh `` — for PowerShell (Windows)
+
+The prompt automatically detects the active shell and selects the matching command.
 
 ## Current 2-Phase Coverage
 
